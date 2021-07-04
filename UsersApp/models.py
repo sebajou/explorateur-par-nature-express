@@ -30,6 +30,8 @@ class Child(models.Model):
     last_login = models.DateTimeField()
     date_jointed = models.DateTimeField()
     pwd = models.CharField(max_length=3)
+    image_profile_child = models.ImageField(upload_to='profile_image/', null=True, blank=True,
+                                       default='elephant.jpeg')
 
     class Meta:
         managed = True
@@ -44,6 +46,8 @@ class Users(AbstractUser, models.Model):
     id_tribut = models.ForeignKey('Tribut', models.DO_NOTHING, db_column='id_tribut', null=True)
     image_profil = models.CharField(max_length=100, blank=True, null=True)
     is_author = models.BooleanField(null=True)
+    image_profile_user = models.ImageField(upload_to='profile_image/', null=True, blank=True,
+                                       default='elephant.jpeg')
 
     class Meta:
         managed = True

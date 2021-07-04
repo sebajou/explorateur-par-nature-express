@@ -11,6 +11,8 @@ class Article(models.Model):
     title = models.CharField(max_length=60)
     objectif = models.CharField(max_length=150)
     content = models.TextField()
+    pedagogic_aims = models.TextField()
+    victory_celebration_display = models.TextField()
     publication_date = models.DateTimeField()
     edition_date = models.DateTimeField()
 
@@ -47,6 +49,7 @@ class Image(models.Model):
     description = models.CharField(max_length=70, blank=True, null=True)
     authors = models.CharField(max_length=60, blank=True, null=True)
     title = models.CharField(max_length=70, blank=True, null=True)
+    image_article = models.ImageField(upload_to='article_image/', null=True, blank=True)
 
     class Meta:
         managed = True
@@ -90,6 +93,7 @@ class Video(models.Model):
     description = models.CharField(max_length=70)
     authors = models.CharField(max_length=60)
     title = models.CharField(max_length=70)
+    video_article = models.FileField(upload_to='article_video/', null=True, blank=True)
 
     class Meta:
         managed = True
