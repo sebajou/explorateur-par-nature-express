@@ -1,0 +1,11 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+
+<hi>Explorateur par nature, bientôt ici, une magnifique roue</hi>
+
+<a href="{% url 'profile' %}"><button type="submit" id="submit">profile</button></a>
+<a href="{% url 'account_logout' %}"><button type="submit" id="submit">logout</button></a>
+<a href="{% url 'signup' %}"><button type="submit" id="submit">signup</button></a>
+
+{% endblock %}

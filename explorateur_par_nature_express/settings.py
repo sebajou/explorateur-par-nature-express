@@ -28,6 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # Application definition
 
@@ -40,10 +43,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third-Party Apps
+    'tailwind',
+    'theme',
     # Local Apps
     'ArticlesApp',
     'UsersApp',
 ]
+
+TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTH_USER_MODEL = 'UsersApp.Users'
+AUTH_USER_MODEL = 'UsersApp.Tribut'
 
 ROOT_URLCONF = 'explorateur_par_nature_express.urls'
 
@@ -84,13 +91,13 @@ WSGI_APPLICATION = 'explorateur_par_nature_express.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ex_par_nat_exp_v3_db',
+        'NAME': 'ex_par_nat_exp_v5_db',
         'USER': 'sebajou',
         'PASSWORD': '3333argh',
         'HOST': 'localhost',
         'PORT': '5432',
         'TEST': {
-            'NAME': 'test_ex_par_nat_v4_db',
+            'NAME': 'test_ex_par_nat_exp_v5_db',
         },
     }
 }

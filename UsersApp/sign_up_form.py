@@ -1,15 +1,19 @@
 from django.contrib.auth.forms import UserCreationForm
-from UsersApp.models import Users, Tribut
+from UsersApp.models import Tutor, Tribut
 from django import forms
 
 
+# noinspection PySuperArguments
 class SignUpForm(UserCreationForm, forms.Form):
     """Form for fill sign up. """
 
-    # Tribut from many to many field. Only one choice possible.
-    tribut_name = forms.CharField(queryset=Tribut.objects.all())
-
     class Meta:
-        model = Users
-        fields = ('username', 'tribut_name', 'password1', 'password2', 'first_name', 'last_name', 'email',
-                  'image_profile')
+        model = Tribut
+        fields = ('username', 'password1', 'password2', 'email')
+
+    # def save(self, commit=True):
+    #     user = super(UserCreationForm, self).save(commit=False)
+    #     user.first_name = user.username
+    #     user.last_name = user.username
+    #     user.save()
+    #     return user
