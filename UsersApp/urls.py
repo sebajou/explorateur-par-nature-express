@@ -6,9 +6,9 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('', user_views.wheel, name='wheel'),
     path('signup/', user_views.user_form, name='signup'),
+    path('tutor_form/', user_views.tutor_form, name='tutor_form'),
     path('UsersApp/accounts/login/', TemplateView.as_view(template_name='registration/login.html'), name='login'),
-    path('UsersApp/accounts/logout/',
-         TemplateView.as_view(template_name='registration/logout.html'), name='account_logout'),
+    path('UsersApp/accounts/logout/', user_views.logout, name='account_logout'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/profile/', user_views.profile, name='profile'),
 ]
