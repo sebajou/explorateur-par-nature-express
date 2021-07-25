@@ -51,7 +51,12 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+        fontFamily: {
+        'titre': ['Londrina Solid'],
+        'corps': ['Proza Libre']
+            }
+        },
     },
     variants: {
         extend: {},

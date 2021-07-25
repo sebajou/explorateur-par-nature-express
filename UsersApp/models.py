@@ -1,6 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
+from io import BytesIO
+from django.core.files import File
+# from sorl.thumbnail import ImageField, get_thumbnail
 # from backend.ArticlesApp.models import
 
 
@@ -26,11 +30,31 @@ class Child(models.Model):
     child_username = models.CharField(max_length=70)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    image_profil = models.CharField(max_length=100, blank=True, null=True)
     date_jointed = models.DateTimeField(auto_now_add=True)
-    pwd = models.CharField(max_length=4)
     image_profile_child = models.ImageField(upload_to='profile_image/', null=True, blank=True,
                                        default='elephant.jpeg')
+
+    # before saving the instance we’re reducing the image
+    def save(self, *args, **kwargs):
+        new_image = self.reduce_image_size(self.image_profile_child)
+        self.image_profile_child = new_image
+        super().save(*args, **kwargs)
+
+    def reduce_image_size(self, image_profile_child):
+        size = 500, 500
+        print("reduced")
+        img = Image.open(image_profile_child)
+        thumb_io = BytesIO()
+        # Resize/modify the image
+        width = img.width
+        height = img.height
+        ratio = width / height
+        new_width = 750
+        new_height = int(new_width / ratio)
+        img = img.resize((new_width, new_height))
+        img.save(thumb_io, 'jpeg', quality=90)
+        new_image = File(thumb_io, name=image_profile_child.name)
+        return new_image
 
     class Meta:
         managed = True
@@ -44,11 +68,32 @@ class Tutor(models.Model):
     tutor_username = models.CharField(max_length=70)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    pwd = models.CharField(max_length=100)
     date_jointed = models.DateTimeField(auto_now_add=True)
     is_author = models.BooleanField(null=True)
     image_profile_tutor = models.ImageField(upload_to='profile_image/', null=True, blank=True,
                                        default='elephant.jpeg')
+
+    # before saving the instance we’re reducing the image
+    def save(self, *args, **kwargs):
+        new_image = self.reduce_image_size(self.image_profile_tutor)
+        self.image_profile_tutor = new_image
+        super().save(*args, **kwargs)
+
+    def reduce_image_size(self, image_profile_tutor):
+        size = 500, 500
+        print("reduced")
+        img = Image.open(image_profile_tutor)
+        thumb_io = BytesIO()
+        # Resize/modify the image
+        width = img.width
+        height = img.height
+        ratio = width / height
+        new_width = 750
+        new_height = int(new_width / ratio)
+        img = img.resize((new_width, new_height))
+        img.save(thumb_io, 'jpeg', quality=90)
+        new_image = File(thumb_io, name=image_profile_tutor.name)
+        return new_image
 
     class Meta:
         managed = True
@@ -71,14 +116,3 @@ class Trophies(models.Model):
     class Meta:
         managed = True
         db_table = 'trophies'
-
-
-class TutorLink(models.Model):
-    id_tutor_link = models.AutoField(primary_key=True)
-    id_child = models.ForeignKey(Child, models.DO_NOTHING, db_column='id_child')
-    id_tutor = models.ForeignKey(Tutor, models.DO_NOTHING, db_column='id')
-
-    class Meta:
-        managed = True
-        db_table = 'tutor_link'
-

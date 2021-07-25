@@ -1,0 +1,20 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+{% load thumbnail %}
+
+<h1 class="font-titre">Membres de la tribut {{ user.username }} </h1>
+
+<h1 class="font-titre">Tuteur : </h1>
+{% for tutor in tutors %}
+    <h2 class="font-corps">Tuteur {{ tutor.tutor_username }} image {{ tutor.image_profile_tutor.url }}</h2>
+    <img src="{{ MEDIA_URL }}{{ tutor.image_profile_tutor }}" alt=""/>
+{% endfor %}
+
+<h1 class="font-titre">Enfants de la tribut : </h1>
+{% for child in children %}
+    <h2 class="font-corps">Child {{ child.child_username }}</h2>
+    <img src="{{ MEDIA_URL }}{{ child.image_profile_child }}" alt=""/>
+{% endfor %}
+
+{% endblock %}

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-Party Apps
     'tailwind',
+    'sorl.thumbnail',
     'theme',
     # Local Apps
     'ArticlesApp',
@@ -77,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -91,14 +93,14 @@ WSGI_APPLICATION = 'explorateur_par_nature_express.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ex_par_nat_exp_v7_db',
+        'NAME': 'ex_par_nat_exp_v9_db',
         'USER': 'sebajou',
         'PASSWORD': '3333argh',
         'HOST': 'localhost',
         'PORT': '5432',
-        'TEST': {
-            'NAME': 'test_ex_par_nat_exp_v7_db',
-        },
+        # 'TEST': {
+        #     'NAME': 'test_ex_par_nat_exp_v9_db',
+        # },
     }
 }
 

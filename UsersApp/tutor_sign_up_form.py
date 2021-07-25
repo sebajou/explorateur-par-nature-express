@@ -11,4 +11,4 @@ class TutorSignUpForm(forms.ModelForm):
     class Meta:
         model = Tutor
         exclude = ('id_tribut', )
-        fields = ('tutor_username', 'first_name', 'last_name', 'email', 'pwd', 'image_profile_tutor')
+        fields = ('tutor_username', 'first_name', 'last_name', 'email', 'image_profile_tutor')
