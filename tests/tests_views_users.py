@@ -28,15 +28,14 @@ class TestPostRoutesGeneral:
     """Test index and homes pages routes """
 
     def setup_method(self):
-        self.tribut_sign_in_page = {'username': 'JoBru', 'password': '1AQWXSZ2'}
-        # self.child_sign_in_page = {'username': 'Judith', 'password': '1AQWXSZ2'}
-        # self.guardian_sign_up_page = {'username': 'Sausau', 'password': '1AQWXSZ2', 'tribut': 'Issacar',
-        #                               'prenom': 'Saushana', 'nom': 'Sussman', 'email': 'sausau@gmail.com'}
-        # self.child_sign_up_page = {'username': 'Eli', 'password': '1234'}
+        self.tribut_signin = {'username': 'JoBru', 'password': '1AQWXSZ2'}
+        self.tutor_sign_up = {'tutor_username': 'didi', 'first_name': 'Judith', 'last_name': 'Delico',
+                                   'email': 'didelico@yahoo.fr'}
+        self.child_sign_up = {'child_username': 'lili', 'first_name': 'Luciane', 'last_name': 'Delico'}
 
     @pytest.mark.django_db
     def test_tribut_sign_in_page(self):
-        user_to_login = self.tribut_sign_in_page
+        user_to_login = self.tribut_signin
         response = c.post('/accounts/login/', user_to_login)
         assert response.status_code == 200
 
@@ -66,3 +65,23 @@ class TestPostRoutesGeneral:
         client.force_login(user)
         response = client.get('/tribut_profile/')
         assert response.status_code == 200
+
+    @pytest.mark.django_db
+    def test_child_signup(self, client, django_user_model):
+        child_signup = self.child_sign_up
+        username = "user1"
+        password = "bar"
+        user = django_user_model.objects.create_user(username=username, password=password)
+        client.force_login(user)
+        response = client.post('/child_form/', child_signup)
+        assert response.status_code == 302
+
+    @pytest.mark.django_db
+    def test_tutor_signup(self, client, django_user_model):
+        tutor_signup = self.tutor_sign_up
+        username = "user1"
+        password = "bar"
+        user = django_user_model.objects.create_user(username=username, password=password)
+        client.force_login(user)
+        response = client.post('/tutor_form/', tutor_signup)
+        assert response.status_code == 302

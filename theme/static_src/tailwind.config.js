@@ -55,6 +55,15 @@ module.exports = {
         fontFamily: {
         'titre': ['Londrina Solid'],
         'corps': ['Proza Libre']
+            },
+        colors: {
+            'explor-sky': '#74A4BC',
+            'explor-blue': '#B6D6CC0',
+            'explor-casse': '#F1FEC6',
+            'explor-red': '#C2705B',
+            'explor-yellow': '#EAAE48',
+            'explor-green': '#667E5A',
+            'explor-white': '#F9F2F0'
             }
         },
     },

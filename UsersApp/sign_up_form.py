@@ -10,10 +10,3 @@ class SignUpForm(UserCreationForm, forms.Form):
     class Meta:
         model = Tribut
         fields = ('username', 'password1', 'password2', 'email')
-
-    # def save(self, commit=True):
-    #     user = super(UserCreationForm, self).save(commit=False)
-    #     user.first_name = user.username
-    #     user.last_name = user.username
-    #     user.save()
-    #     return user
