@@ -15,6 +15,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/profile/', user_views.profile, name='profile'),
     path('tribut_profile/', user_views.tribut_profile, name='tribut_profile'),
+    path('login_success/', user_views.login_success, name='login_success'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

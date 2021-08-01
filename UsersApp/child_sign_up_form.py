@@ -10,5 +10,5 @@ class ChildSignUpForm(forms.ModelForm):
 
     class Meta:
         model = Child
-        exclude = ('id_tribut', )
+        exclude = ('account_tribut', )
         fields = ('child_username', 'first_name', 'last_name', 'image_profile_child')

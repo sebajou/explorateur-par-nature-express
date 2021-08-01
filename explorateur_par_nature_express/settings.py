@@ -63,7 +63,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTH_USER_MODEL = 'UsersApp.Tribut'
+AUTH_USER_MODEL = 'UsersApp.Account'
+
+LOGIN_REDIRECT_URL = 'login_success'
 
 ROOT_URLCONF = 'explorateur_par_nature_express.urls'
 
@@ -93,13 +95,13 @@ WSGI_APPLICATION = 'explorateur_par_nature_express.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ex_par_nat_exp_v9_db',
+        'NAME': 'ex_par_nat_exp_v10_db',
         'USER': 'sebajou',
         'PASSWORD': '3333argh',
         'HOST': 'localhost',
         'PORT': '5432',
         # 'TEST': {
-        #     'NAME': 'test_ex_par_nat_exp_v9_db',
+        #     'NAME': 'test_ex_par_nat_exp_v10_db',
         # },
     }
 }

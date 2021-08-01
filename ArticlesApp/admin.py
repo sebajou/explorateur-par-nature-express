@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Article, Bibliography, Equipment, Image, ListImage, ListEquipment, ListVideo, Video
+from .models import Article, Bibliography, Equipment, Image, ListImage, ListEquipment, ListVideo, Video, Author
 
 
 admin.site.register(Article)
+admin.site.register(Author)
 admin.site.register(Bibliography)
 admin.site.register(Equipment)
 admin.site.register(Image)

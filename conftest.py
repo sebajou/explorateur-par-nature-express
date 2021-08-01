@@ -7,7 +7,7 @@ from django.conf import settings
 def django_db_setup(django_db_setup, django_db_blocker):
     try:
         with django_db_blocker.unblock():
-            call_command('loaddata', 'test_ex_par_nat_exp_v9_db.json', verbosity=1)
+            call_command('loaddata', 'test_ex_par_nat_exp_v10_db.json', verbosity=1)
         print('conftest for populate test database')
     except:
         print('conftest fail to populate test database')

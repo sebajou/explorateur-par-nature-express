@@ -1,8 +1,17 @@
 from django.db import models
-from UsersApp.models import Badge, Tutor, Tribut
+from UsersApp.models import Badge, Tutor, Tribut, Account
+from django.contrib.auth.models import AbstractUser
 
 
 # Create your models here.
+
+
+class Author(models.Model):
+    account_author = models.OneToOneField(Account, on_delete=models.CASCADE, primary_key=True)
+
+    class Meta:
+        managed = True
+        db_table = 'author'
 
 
 class Article(models.Model):
@@ -23,13 +32,13 @@ class Article(models.Model):
 
 class Bibliography(models.Model):
     id_bibliography = models.AutoField(primary_key=True)
-    id_article = models.ForeignKey(Article, models.DO_NOTHING, db_column='id_article')
-    id_tribut = models.ForeignKey('UsersApp.Tribut', models.DO_NOTHING, db_column='id')
+    id_article = models.ForeignKey('Article', models.DO_NOTHING, db_column='id_article')
+    account_author = models.ForeignKey('Author', models.DO_NOTHING, db_column='account_author')
 
     class Meta:
         managed = True
         db_table = 'bibliography'
-        unique_together = (('id_bibliography', 'id_article', 'id_tribut'),)
+        unique_together = (('id_bibliography', 'id_article', 'account_author'),)
 
 
 class Equipment(models.Model):
