@@ -95,13 +95,13 @@ WSGI_APPLICATION = 'explorateur_par_nature_express.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ex_par_nat_exp_v11_db',
+        'NAME': 'ex_par_nat_exp_v12_db',
         'USER': 'sebajou',
         'PASSWORD': '3333argh',
         'HOST': 'localhost',
         'PORT': '5432',
         # 'TEST': {
-        #     'NAME': 'test_ex_par_nat_exp_v11_db',
+        #     'NAME': 'test_ex_par_nat_exp_v12_db',
         # },
     }
 }

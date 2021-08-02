@@ -1,0 +1,12 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+
+<h1>title: {{ object.title }}</h1>
+<p>category: {{ object.category }}</p>
+<p>level: {{ object.level }}</p>
+<p>
+    <img src="{{ MEDIA_URL }}{{ object.image_badge }}" alt=""/>
+</p>
+
+{% endblock %}

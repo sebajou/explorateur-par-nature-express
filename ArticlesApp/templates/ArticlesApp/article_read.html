@@ -1,0 +1,36 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+
+<h1>{{ object.title }}</h1>
+<p>{{ object.objectif }}</p>
+<p>{{ object.content }}</p>
+<p>
+    {% for equipement in object.list_equipement %}
+        <ul>
+            <li>{{ equipement.text }}: {{ equipement.quantity }} {{ equipement.unity }}</li>
+        </ul>
+    {% endfor %}
+</p>
+<p>
+    {% for image in object.list_image %}
+        <img src="{{ MEDIA_URL }}{{ image.image_article }}" alt=""/>
+        <ul>
+            <li>{{ image.title }}: {{ image.description }} Autheur: {{ image.authors }}</li>
+        </ul>
+    {% endfor %}
+</p>
+<p>
+    {% for video in object.list_video %}
+        <video width="400" controls>
+            <source src="{{ MEDIA_URL }}{{ video.video_article }}" type="video/mp4">
+            <source src="{{ MEDIA_URL }}{{ video.video_article }}" type="video/ogg">
+            Your browser does not support HTML video.
+        </video>
+        <ul>
+            <li>{{ video.title }}: {{ video.description }} {{ video.authors }}</li>
+        </ul>
+    {% endfor %}
+</p>
+
+{% endblock %}

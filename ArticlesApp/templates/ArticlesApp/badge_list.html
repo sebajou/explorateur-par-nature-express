@@ -1,0 +1,14 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+
+<h1>List des badges</h1>
+<ul>
+{% for badge in object_list %}
+    <li>{{ badge.category|level }} - {{ badge.title }}</li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

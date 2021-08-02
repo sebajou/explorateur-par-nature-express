@@ -4,11 +4,6 @@ from django.utils.translation import gettext_lazy as _
 from PIL import Image
 from io import BytesIO
 from django.core.files import File
-# from sorl.thumbnail import ImageField, get_thumbnail
-# from backend.ArticlesApp.models import
-
-
-# Create your models here.
 
 
 class Account(AbstractUser, models.Model):
@@ -26,8 +21,7 @@ class Badge(models.Model):
     title = models.CharField(max_length=100)
     category = models.CharField(max_length=60)
     level = models.IntegerField()
-    type = models.CharField(max_length=40)
-    filefield = models.CharField(max_length=100)
+    image_badge = models.ImageField(upload_to='badge_image/', null=True, blank=True)
 
     class Meta:
         managed = True
@@ -41,9 +35,9 @@ class Child(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     date_jointed = models.DateTimeField(auto_now_add=True)
-    trophies = models.ManyToManyField(Badge)
+    trophies = models.ManyToManyField(Badge, blank=True)
     image_profile_child = models.ImageField(upload_to='profile_image/', null=True, blank=True,
-                                       default='elephant.jpeg')
+                                            default='elephant.jpeg')
 
     # before saving the instance we’re reducing the image
     def save(self, *args, **kwargs):
@@ -117,13 +111,3 @@ class Tribut(models.Model):
     class Meta:
         managed = True
         db_table = 'tribut'
-
-
-# class Trophies(models.Model):
-#     id_trophies = models.AutoField(primary_key=True)
-#     id_child = models.ForeignKey(Child, models.DO_NOTHING, db_column='id_child')
-#     id_badge = models.ForeignKey(Badge, models.DO_NOTHING, db_column='id_badge')
-#
-#     class Meta:
-#         managed = True
-#         db_table = 'trophies'
