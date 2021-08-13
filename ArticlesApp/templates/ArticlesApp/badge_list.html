@@ -5,7 +5,15 @@
 <h1>List des badges</h1>
 <ul>
 {% for badge in object_list %}
-    <li>{{ badge.category|level }} - {{ badge.title }}</li>
+    <p>
+        <a href="{% url 'badge_update' badge.pk %}">Update</a>
+        <li>title : {{ badge.title }}</li>
+        <li>category : {{ badge.category }}</li>
+        <li>level : {{ badge.level }}</li>
+        <img src="{{ MEDIA_URL }}{{ badge.image_badge }}" alt=""/>
+        <a href="{% url 'badge_read' badge.pk badge.title|slugify %}">detail</a>
+        <a class="font-corps" href="{% url 'badge_confirm_delete' badge.pk %}"><button type="submit" id="submit">badge_confirm_delete</button></a>
+    </p>
 {% empty %}
     <li>No articles yet.</li>
 {% endfor %}

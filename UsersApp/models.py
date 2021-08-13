@@ -21,7 +21,7 @@ class Badge(models.Model):
     title = models.CharField(max_length=100)
     category = models.CharField(max_length=60)
     level = models.IntegerField()
-    image_badge = models.ImageField(upload_to='badge_image/', null=True, blank=True)
+    image_badge = models.ImageField(upload_to='badge_image/', null=True, blank=True, default='ex-par-nat_logo.png')
 
     class Meta:
         managed = True
