@@ -16,7 +16,8 @@ urlpatterns = [
     path('badge/<int:pk>/<slug:slug>/', article_views.BadgeReadView.as_view(), name='badge_read'),
     path('badge/<int:pk>/', article_views.BadgeUpdateView.as_view(), name='badge_update'),
     path('badge/<int:pk>/delete/',
-         article_views.BadgeDeleteView.as_view(template_name='ArticlesApp/badge_confirm_delete.html'),
+         article_views.BadgeDeleteView.as_view(
+             template_name='ArticlesApp/badge_confirm_delete.html'),
          name='badge_confirm_delete'),
 ]
 

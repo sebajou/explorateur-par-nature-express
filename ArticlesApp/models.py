@@ -44,7 +44,7 @@ class Video(models.Model):
 
 class Article(models.Model):
     id_article = models.AutoField(primary_key=True)
-    id_badge = models.ForeignKey('UsersApp.Badge', models.DO_NOTHING, db_column='id_badge')
+    id_badge = models.ForeignKey('UsersApp.Badge', db_column='id_badge', on_delete=models.CASCADE)
     title = models.CharField(max_length=60)
     objectif = models.CharField(max_length=150)
     content = models.TextField()

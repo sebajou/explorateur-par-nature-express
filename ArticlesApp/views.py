@@ -128,13 +128,17 @@ class BadgeUpdateView(UpdateView):
 @method_decorator([login_required, author_required], name='dispatch')
 class BadgeDeleteView(DeleteView):
     model = Badge
-    # template_name = 'ArticlesApp/badge_confirm_delete.html'
-    success_url = "/"
-    # success_url = reverse_lazy('badge_list')
+    # template_name = 'ArticlesApp/templates/ArticlesApp/badge_confirm_delete.html'
+    # success_url = "/"
+    success_url = reverse_lazy('badge_list')
+    print('in BadgeDeleteView')
     # context_object_name = 'badge'
     # success_url = reverse_lazy('views:badge_list')
     #
-    # def delete(self, request, *args, **kwargs):
-    #     badge = self.get_object()
-    #     messages.success(request, 'The article %s was deleted with success!' % badge.title)
-    #     return super().delete(request, *args, **kwargs)
+
+
+    def delete(self, request, *args, **kwargs):
+        badge = self.get_object()
+        print('badge', Badge.objects.get(title=badge.title))
+        messages.success(request, 'The article %s was deleted with success!' % badge.title)
+        return super().delete(request, *args, **kwargs)
