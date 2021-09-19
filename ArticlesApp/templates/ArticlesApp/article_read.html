@@ -2,35 +2,37 @@
 
 {% block content %}
 
-<h1>{{ object.title }}</h1>
-<p>{{ object.objectif }}</p>
-<p>{{ object.content }}</p>
-<p>
-    {% for equipement in object.list_equipement %}
-        <ul>
-            <li>{{ equipement.text }}: {{ equipement.quantity }} {{ equipement.unity }}</li>
-        </ul>
-    {% endfor %}
-</p>
-<p>
-    {% for image in object.list_image %}
+<p><br>
+    <li>title : {{ object.title }}</li><br>
+    <li>objectif : {{ object.objectif }}</li><br>
+    <li>content : {{ object.content }}</li><br>
+    <li>pedagogic_aims : {{ object.pedagogic_aims }}</li>
+    <li>
+    {% for image in object.list_image.all %}
+        Titre de l'image : {{ image.title }}
         <img src="{{ MEDIA_URL }}{{ image.image_article }}" alt=""/>
-        <ul>
-            <li>{{ image.title }}: {{ image.description }} Autheur: {{ image.authors }}</li>
-        </ul>
     {% endfor %}
-</p>
-<p>
-    {% for video in object.list_video %}
-        <video width="400" controls>
-            <source src="{{ MEDIA_URL }}{{ video.video_article }}" type="video/mp4">
-            <source src="{{ MEDIA_URL }}{{ video.video_article }}" type="video/ogg">
-            Your browser does not support HTML video.
-        </video>
-        <ul>
-            <li>{{ video.title }}: {{ video.description }} {{ video.authors }}</li>
-        </ul>
+    </li>
+    <li>
+    {% for equipement in object.list_equipement.all %}
+        text de l'equipement : {{ equipement.text }}
+        quantity de l'equipement : {{ equipement.quantity }}
+        unity de l'equipement : {{ equipement.unity }}
     {% endfor %}
+    </li>
+    <li>
+        <a href="{% url 'article_update' object.pk %}">Update</a>
+    </li>
+    <li>
+        {% if user.is_tribut == True %}
+        <form class="article_child_success_choice" action="{% url 'article_child_success_choice' %}" method="post">
+            {% csrf_token %}
+            <input id="id_article_{{ forloop.counter0 }}" type="hidden" value="{{ object.id_article }}" name="id_article">
+            <button class="article_child_success_choice" type="submit">{{ object.title }}  articles_child_success</button>
+        </form>
+        {% endif %}
+    </li>
+    <br><br><br>
 </p>
 
 {% endblock %}

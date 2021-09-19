@@ -4,15 +4,34 @@ from UsersApp.tutor_sign_up_form import TutorSignUpForm
 from UsersApp.child_sign_up_form import ChildSignUpForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout as account_logout
-from UsersApp.models import Tribut, Tutor, Child, Account
+from UsersApp.models import Tribut, Tutor, Child, Account, Badge
+from ArticlesApp.models import Article, Image
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from UsersApp.decorator import tribut_required
 # Create your views here.
+from django.test import TransactionTestCase
 
 
 def wheel(request):
-    return render(request, 'UsersApp/wheel.html')
+    articles = Article.objects.all()
+    badges = Badge.objects.all()
+    articles_badge_1 = Article.objects.filter(id_badge=1)
+    articles_badge_2 = Article.objects.filter(id_badge=2)
+    articles_badge_3 = Article.objects.filter(id_badge=3)
+    articles_badge_4 = Article.objects.filter(id_badge=4)
+    articles_badge_5 = Article.objects.filter(id_badge=5)
+    articles_badge_6 = Article.objects.filter(id_badge=6)
+    articles_badge_7 = Article.objects.filter(id_badge=7)
+
+    return render(request, 'UsersApp/wheel.html', {'articles': articles, 'badges': badges,
+                                                   'articles_badge_1': articles_badge_1,
+                                                   'articles_badge_2': articles_badge_2,
+                                                   'articles_badge_3': articles_badge_3,
+                                                   'articles_badge_4': articles_badge_4,
+                                                   'articles_badge_5': articles_badge_5,
+                                                   'articles_badge_6': articles_badge_6,
+                                                   'articles_badge_7': articles_badge_7})
 
 
 def user_form(request):
@@ -105,7 +124,7 @@ def tribut_profile(request):
 @login_required
 def login_success(request):
     """
-    Redirects users based on whether they are in the admins group
+    Redirects users based on whether they are in the admins groupli
     """
     if request.user.is_tribut:
         # user is tribut
@@ -115,3 +134,59 @@ def login_success(request):
         return redirect("author_home")
     else:
         return redirect("login")
+
+
+@login_required
+@tribut_required
+def articles_child_success(request):
+    if request.method == 'POST':
+        print('post')
+        id_child = request.POST.get('id_child')
+        id_article = request.POST.get('id_article')
+        print('id_child: ', id_child, 'id_article: ', id_article)
+        instance_child = Child.objects.get(id_child=id_child)
+        instance_article = Article.objects.get(id_article=id_article)
+        instance_article.success_article.add(instance_child)
+    return redirect('wheel')
+
+
+@login_required
+@tribut_required
+def articles_badge_winner(request):
+    """
+    Allow a badge to a child (add to trophees) if all article for a given badge is successful (loop in success table).
+    """
+    if request.method == 'POST':
+        id_child = request.POST.get('id_child')
+        all_id_badges = Badge.objects.values_list('id_badge', flat=True)
+        articles_of_child = Article.objects.filter(success_article=id_child).values('id_article')
+        all_true = False
+        for id_badge in all_id_badges:
+            articles_of_badge = Article.objects.filter(id_badge=id_badge).values('id_article')
+            if (list(articles_of_badge)) == (list(articles_of_child)):
+                all_true = True
+            else:
+                all_true = False
+            if all_true:
+                instance_child = Child.objects.get(id_child=id_child)
+                instance_badge = Badge.objects.get(id_badge=id_badge)
+                instance_child.trophies.add(instance_badge)
+                all_true = False
+
+        return redirect('articles_badge_winner')
+
+    else:
+        return render(request, 'registration/child_signup.html')
+
+
+@login_required
+@tribut_required
+def article_child_success_choice(request):
+    """Page for choose the child which succeed with the previous read article"""
+    if request.method == 'POST':
+        id_article = request.POST.get('id_article')
+        print('id_article ', id_article)
+        q_child = Child.objects.filter(account_tribut=request.user.id_account).values()
+        print('q_child ', q_child)
+        return render(request, 'UsersApp/article_success_child_choice.html',
+                      {'q_child': q_child, 'id_article': id_article})

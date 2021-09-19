@@ -1,0 +1,17 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+
+    <form class="articles_child_success" action="{% url 'articles_child_success' %}" method="post">
+        {% csrf_token %}
+            <input type="hidden" id="id_article_{{ forloop.counter0 }}" name="id_article" value="{{ id_article }}">{{ id_article }}<br>
+        {% for child in q_child %}
+
+            <input type="radio" id="id_child_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">
+            <label >
+                {{ child.child_username }}
+            </label><br>
+            {% endfor %}
+        <button class="articles_child_success" type="submit"> articles_child_success</button>
+    </form>
+{% endblock %}

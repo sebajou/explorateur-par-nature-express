@@ -1,5 +1,5 @@
 from django.db import models
-from UsersApp.models import Badge, Tutor, Tribut, Account
+from UsersApp.models import Badge, Tutor, Tribut, Account, Child
 from django.contrib.auth.models import AbstractUser
 
 
@@ -16,7 +16,7 @@ class Equipment(models.Model):
 
 class Image(models.Model):
     id_image = models.AutoField(primary_key=True)
-    imagefield = models.CharField(max_length=100, blank=True, null=True)
+    num_apparition = models.IntegerField()
     description = models.CharField(max_length=70, blank=True, null=True)
     authors = models.CharField(max_length=60, blank=True, null=True)
     title = models.CharField(max_length=70, blank=True, null=True)
@@ -30,7 +30,7 @@ class Image(models.Model):
 
 class Video(models.Model):
     id_video = models.AutoField(primary_key=True)
-    videofield = models.CharField(max_length=100)
+    num_apparition = models.IntegerField()
     description = models.CharField(max_length=70)
     authors = models.CharField(max_length=60)
     title = models.CharField(max_length=70)
@@ -52,6 +52,8 @@ class Article(models.Model):
     victory_celebration_display = models.TextField()
     publication_date = models.DateTimeField(auto_now_add=True)
     edition_date = models.DateTimeField(auto_now=True)
+    article_cover_image = models.ImageField(upload_to='article_cover_image/', null=True, blank=True, default='ex-par-nat_logo.png')
+    success_article = models.ManyToManyField(Child, blank=True)
     list_video = models.ManyToManyField(Video, blank=True)
     list_image = models.ManyToManyField(Image, blank=True)
     list_equipement = models.ManyToManyField(Equipment, blank=True)

@@ -32,8 +32,10 @@ class TestPostRoutesGeneral:
     def setup_method(self):
         self.tutor_signup = {'tutor_username': 'didi', 'first_name': 'Judith', 'last_name': 'Delico',
                         'email': 'didelico@yahoo.fr'}
-        self.tribut_signin = {'username': 'JoBru', 'password': '1AQWXSZ2'}
+        self.tribut_signin = {'username': 'Pratrib', 'password': '1AQWXSZ2'}
         self.child_sign_up = {'child_username': 'lili', 'first_name': 'Luciane', 'last_name': 'Delico'}
+        self.child_id = {'id_child': 1}
+        self.article_id = {'id_article': 4}
 
     @pytest.mark.django_db
     def test_tribut_sign_in_page(self):
@@ -48,7 +50,7 @@ class TestPostRoutesGeneral:
         # user = django_user_model.objects.create_user(username=username, password=password)
         # client.force_login(user)
         # response = client.get('/tutor_form/')
-        c.login(username='JoBru', password='1AQWXSZ2')
+        c.login(username='Pratrib', password='1AQWXSZ2')
         response = c.get('/tutor_form/')
         assert response.status_code == 200
 
@@ -59,7 +61,7 @@ class TestPostRoutesGeneral:
         # user = django_user_model.objects.create_user(username=username, password=password)
         # client.force_login(user)
         # response = client.get('/child_form/')
-        c.login(username='JoBru', password='1AQWXSZ2')
+        c.login(username='Pratrib', password='1AQWXSZ2')
         response = c.get('/child_form/')
         assert response.status_code == 200
 
@@ -70,20 +72,33 @@ class TestPostRoutesGeneral:
         # user = django_user_model.objects.create_user(username=username, password=password)
         # client.force_login(user)
         # response = client.get('/tribut_profile/')
-        c.login(username='JoBru', password='1AQWXSZ2')
+        c.login(username='Pratrib', password='1AQWXSZ2')
         response = c.get('/tribut_profile/')
         assert response.status_code == 200
 
     @pytest.mark.django_db
     def test_child_signup(self, client, django_user_model):
         child_signup = self.child_sign_up
-        c.login(username='JoBru', password='1AQWXSZ2')
+        c.login(username='Pratrib', password='1AQWXSZ2')
         response = c.post('/child_form/', child_signup)
         assert response.status_code == 302
 
     @pytest.mark.django_db
     def test_tutor_signup(self, client, django_user_model):
         tutor_signup = self.tutor_signup
-        c.login(username='JoBru', password='1AQWXSZ2')
+        c.login(username='Pratrib', password='1AQWXSZ2')
         response = client.post('/tutor_form/', tutor_signup)
         assert response.status_code == 302
+
+    @pytest.mark.django_db
+    def test_child_one_article_success(self, client):
+        id_child = self.child_id
+        id_article = self.article_id
+        id_to_post = {'child_id': id_child, 'article_id': id_article}
+        c.login(username='Pratrib', password='1AQWXSZ2')
+        response = client.post('articles_child_success', id_to_post)
+        assert response.status_code == 302
+
+    @pytest.mark.django_db
+    def test_child_one_badge_success(self):
+        pass
