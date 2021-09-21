@@ -1,0 +1,79 @@
+{% extends "base_user.html" %}
+
+{% block content %} {% load static %} {% load previous_next %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+
+          <h1 class="font-titre">Explorateur par nature, de magnifique caroussel</h1>
+
+          <a class="font-corps" href="{% url 'profile' %}"><button type="submit" id="submit1">profile</button></a>
+          <a class="font-corps" href="{% url 'account_logout' %}"><button type="submit" id="submit2">logout</button></a>
+          <a class="font-corps" href="{% url 'signup' %}"><button type="submit" id="submit3">signup</button></a>
+        <br><br><br>
+
+      <style>
+        .carousel-open:checked+.carousel-item {
+          position: static;
+          opacity: 100;
+        }
+
+        .carousel-item {
+          -webkit-transition: opacity 0.6s ease-out;
+          transition: opacity 0.6s ease-out;
+        }
+
+        .carousel-indicators {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          bottom: 2%;
+          left: 0;
+          right: 0;
+          text-align: center;
+          z-index: 10;
+        }
+      </style>
+
+{% regroup articles by id_badge as articles_badge %}
+
+{% for articles in articles_badge %}
+    <!-- define each caroussel -->
+    Les articles suivant te permetterons de gagner le badge "{{ articles.grouper.title }}": <br>
+      <style>
+        {% for article in articles.list %}#carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}:checked~.control-{{forloop.counter0}} {
+        display: block;
+        }{% endfor %}
+
+        {% for article in articles.list %}
+        #carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}:checked~.control-{{forloop.counter0}}~.carousel-indicators li:nth-child({{forloop.counter0}})
+         .carousel-bullet {
+          color: #2b6cb0;
+        }{% endfor %}
+      </style>
+
+    <div class="carousel relative rounded relative overflow-hidden shadow-xl">
+        <div class="carousel-inner relative overflow-hidden w-full">
+            {% for article in articles.list %}
+            <!-- define each Slide -->
+            <input class="carousel-open" type="radio" id="carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}" name="carousel{{forloop.parentloop.counter}}" aria-hidden="true" hidden=""
+            checked="checked" style="display:none">
+            <div class="carousel-item absolute opacity-0 bg-center" style="height:500px; background-image: url({{ MEDIA_URL }}{{ article.article_cover_image }})">
+            {{article.title}}</div>
+            {% endfor %}
+            <ol class="carousel-indicators">
+            {% for article in articles.list %}
+                <li class="inline-block mr-3">
+                    <label for="carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}"
+                    class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+                </li>
+            {% endfor %}
+            </ol>
+        </div>
+    </div>
+<br><br><br>
+{% endfor %}
+<br><br><br>
+
+
+
+{% endblock %}

@@ -15,23 +15,8 @@ from django.test import TransactionTestCase
 
 def wheel(request):
     articles = Article.objects.all()
-    badges = Badge.objects.all()
-    articles_badge_1 = Article.objects.filter(id_badge=1)
-    articles_badge_2 = Article.objects.filter(id_badge=2)
-    articles_badge_3 = Article.objects.filter(id_badge=3)
-    articles_badge_4 = Article.objects.filter(id_badge=4)
-    articles_badge_5 = Article.objects.filter(id_badge=5)
-    articles_badge_6 = Article.objects.filter(id_badge=6)
-    articles_badge_7 = Article.objects.filter(id_badge=7)
 
-    return render(request, 'UsersApp/wheel.html', {'articles': articles, 'badges': badges,
-                                                   'articles_badge_1': articles_badge_1,
-                                                   'articles_badge_2': articles_badge_2,
-                                                   'articles_badge_3': articles_badge_3,
-                                                   'articles_badge_4': articles_badge_4,
-                                                   'articles_badge_5': articles_badge_5,
-                                                   'articles_badge_6': articles_badge_6,
-                                                   'articles_badge_7': articles_badge_7})
+    return render(request, 'UsersApp/wheel3.html', {'articles': articles})
 
 
 def user_form(request):
