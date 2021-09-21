@@ -35,10 +35,15 @@
       </style>
 
 {% regroup articles by id_badge as articles_badge %}
-
+<div class="grid grid-cols-6 gap-4">
 {% for articles in articles_badge %}
     <!-- define each caroussel -->
-    Les articles suivant te permetterons de gagner le badge "{{ articles.grouper.title }}": <br>
+    <div class="col-start-2 col-span-4 font-titre text-center">
+        <button class="px-6 mt-6 bg-explor-yellow bg-opacity-70 rounded-full">
+            Les articles suivant te permetterons de gagner le badge "{{ articles.grouper.title }}":
+        </button>
+    </div>
+
       <style>
         {% for article in articles.list %}#carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}:checked~.control-{{forloop.counter0}} {
         display: block;
@@ -51,28 +56,37 @@
         }{% endfor %}
       </style>
 
-    <div class="carousel relative rounded relative overflow-hidden shadow-xl">
+
+    <div class="col-start-2 col-span-4 carousel relative rounded-xl relative overflow-hidden shadow-xl">
         <div class="carousel-inner relative overflow-hidden w-full">
             {% for article in articles.list %}
             <!-- define each Slide -->
+            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1 translate-y-1 rounded-full">
+                <img src="{{ MEDIA_URL }}{{ articles.grouper.image_badge }}" alt=""/>
+            </span>
             <input class="carousel-open" type="radio" id="carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}" name="carousel{{forloop.parentloop.counter}}" aria-hidden="true" hidden=""
             checked="checked" style="display:none">
             <div class="carousel-item absolute opacity-0 bg-center" style="height:500px; background-image: url({{ MEDIA_URL }}{{ article.article_cover_image }})">
-            {{article.title}}</div>
+                <div class="col-start-2 col-span-4 font-corps text-center text-explor-white text-3xl">
+                    <button class="px-6 mt-6 bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full">
+                        {{article.title}}
+                    </button>
+                </div>
+            </div>
             {% endfor %}
             <ol class="carousel-indicators">
             {% for article in articles.list %}
                 <li class="inline-block mr-3">
                     <label for="carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}"
-                    class="carousel-bullet cursor-pointer block text-4xl text-white hover:text-blue-700">•</label>
+                    class="carousel-bullet cursor-pointer block text-6xl text-white hover:text-blue-700">•</label>
                 </li>
             {% endfor %}
             </ol>
         </div>
     </div>
-<br><br><br>
-{% endfor %}
-<br><br><br>
+    <br><br><br>
+    {% endfor %}
+</div>
 
 
 
