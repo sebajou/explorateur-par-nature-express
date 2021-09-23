@@ -135,33 +135,35 @@ def articles_child_success(request):
     return redirect('wheel')
 
 
-@login_required
-@tribut_required
-def articles_badge_winner(request):
-    """
-    Allow a badge to a child (add to trophees) if all article for a given badge is successful (loop in success table).
-    """
-    if request.method == 'POST':
-        id_child = request.POST.get('id_child')
-        all_id_badges = Badge.objects.values_list('id_badge', flat=True)
-        articles_of_child = Article.objects.filter(success_article=id_child).values('id_article')
-        all_true = False
-        for id_badge in all_id_badges:
-            articles_of_badge = Article.objects.filter(id_badge=id_badge).values('id_article')
-            if (list(articles_of_badge)) == (list(articles_of_child)):
-                all_true = True
-            else:
-                all_true = False
-            if all_true:
-                instance_child = Child.objects.get(id_child=id_child)
-                instance_badge = Badge.objects.get(id_badge=id_badge)
-                instance_child.trophies.add(instance_badge)
-                all_true = False
-
-        return redirect('articles_badge_winner')
-
-    else:
-        return render(request, 'registration/child_signup.html')
+# @login_required
+# @tribut_required
+# def articles_badge_winner(request):
+#     """
+#     Allow a badge to a child (add to trophees) if all article for a given badge is successful (loop in success table).
+#     """
+#     if request.method == 'POST':
+#         id_child = request.POST.get('id_child')
+#         all_id_badges = Badge.objects.values_list('id_badge', flat=True)
+#
+#         all_true = False
+#         for id_badge in all_id_badges:
+#             articles_of_child = Article.objects.filter(success_article=id_child, id_badge=id_badge).values('id_article')
+#             articles_of_badge = Article.objects.filter(id_badge=id_badge).values('id_article')
+#             if (list(articles_of_badge)) == (list(articles_of_child)):
+#                 all_true = True
+#             else:
+#                 all_true = False
+#             if all_true:
+#                 instance_child = Child.objects.get(id_child=id_child)
+#                 instance_badge = Badge.objects.get(id_badge=id_badge)
+#                 instance_child.trophies.add(instance_badge)
+#                 all_true = False
+#
+#         return redirect('articles_badge_winner')
+#         # return redirect('trophies_gallery', id_child=id_child, context_instance=RequestContext(request))
+#
+#     else:
+#         return render(request, 'registration/child_signup.html')
 
 
 @login_required
@@ -175,3 +177,32 @@ def article_child_success_choice(request):
         print('q_child ', q_child)
         return render(request, 'UsersApp/article_success_child_choice.html',
                       {'q_child': q_child, 'id_article': id_article})
+
+@login_required
+@tribut_required
+def gallery_of_child_trophies(request, id_child):
+    if request.method == 'POST':
+        id_child = request.POST.get('id_child')
+
+        # Give badges to the child if the badge's articles are all success
+        all_id_badges = Badge.objects.values_list('id_badge', flat=True)
+        all_true = False
+        for id_badge in all_id_badges:
+            articles_of_child = Article.objects.filter(success_article=id_child, id_badge=id_badge).values('id_article')
+            articles_of_badge = Article.objects.filter(id_badge=id_badge).values('id_article')
+            if (list(articles_of_badge)) == (list(articles_of_child)):
+                all_true = True
+            else:
+                all_true = False
+            if all_true:
+                instance_child = Child.objects.get(id_child=id_child)
+                instance_badge = Badge.objects.get(id_badge=id_badge)
+                instance_child.trophies.add(instance_badge)
+                all_true = False
+
+        # List the badge win by the child
+        child = Child.objects.filter(id_child=id_child)
+        child_trophies = Badge.objects.filter(child__id_child=id_child)
+
+        return render(request, 'UsersApp/gallery_of_child_trophies.html',
+                      {'child_trophies': child_trophies, 'child': child})

@@ -8,14 +8,20 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
     {% tailwind_css %}
-<body class="bg-explor-white">
+    <body class="bg-explor-white">
 
-    <div>
-        
-        <h1 class="font-titre mb-1 text-xl sm:text-4xl text-explor-green text-center m-4">Explorateur par nature</h1>
-    </div>
+        <div>
 
-{% block content %}
-{% endblock %}
-</body>
+            <h1 class="font-titre mb-1 text-l sm:text-6xl text-explor-green text-center m-4">Explorateur par nature</h1>
+        </div>
+
+        {% block content %}
+        {% endblock %}
+
+        <!-- Footer-->
+        <footer class="bg-explor-red py-5 font-corps text-center">
+            <div class="container"><a class="">Mentions Légales - <a class="small text-center text-muted">Contact</a></a></a></div>
+        </footer>
+
+    </body>
 </html>

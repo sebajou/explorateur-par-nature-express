@@ -1,0 +1,12 @@
+{% extends "base_user.html" %}
+
+{% block content %}
+Voilà les trophées obtenue par {% for child in child  %}{{ child.first_name }}{% endfor %} :
+<ol>
+{% for trophie in child_trophies  %}
+    <li>
+        {{ trophie.title }}
+    </li>
+{% endfor %}
+</ol>
+{% endblock %}

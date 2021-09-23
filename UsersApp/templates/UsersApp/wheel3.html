@@ -38,13 +38,13 @@
 <div class="grid grid-cols-6 gap-4">
 {% for articles in articles_badge %}
     <!-- define each caroussel -->
-    <div class="col-start-2 col-span-4 font-titre text-center">
+<div class="col-start-1 col-span-6 sm:col-start-2 sm:col-span-4 bg-explor-yellow rounded-3xl m-8 p-2">
+    <div class="bg-explr-yellow rounded-full font-titre text-center py-3">
         <button class="px-6 mt-6 bg-explor-yellow bg-opacity-70 rounded-full">
             Les articles suivant te permetterons de gagner le badge "{{ articles.grouper.title }}":
         </button>
     </div>
-
-      <style>
+    <style>
         {% for article in articles.list %}#carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}:checked~.control-{{forloop.counter0}} {
         display: block;
         }{% endfor %}
@@ -54,10 +54,10 @@
          .carousel-bullet {
           color: #2b6cb0;
         }{% endfor %}
-      </style>
+    </style>
 
 
-    <div class="col-start-2 col-span-4 carousel relative rounded-xl relative overflow-hidden shadow-xl">
+    <div class="carousel relative rounded-xl relative overflow-hidden shadow-xl">
         <div class="carousel-inner relative overflow-hidden w-full">
             {% for article in articles.list %}
             <!-- define each Slide -->
@@ -69,7 +69,7 @@
             <div class="carousel-item absolute opacity-0 bg-center" style="height:500px; background-image: url({{ MEDIA_URL }}{{ article.article_cover_image }})">
                 <div class="col-start-2 col-span-4 font-corps text-center text-explor-white text-3xl">
                     <button class="px-6 mt-6 bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full">
-                        {{article.title}}
+                        <a href="{% url 'article_read' pk=article.id_article slug=article.title|slugify %}">{{article.title}}</a>
                     </button>
                 </div>
             </div>
@@ -84,10 +84,10 @@
             </ol>
         </div>
     </div>
-    <br><br><br>
-    {% endfor %}
+</div>
+{% endfor %}
 </div>
 
-
+<br><br><br>
 
 {% endblock %}

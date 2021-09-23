@@ -14,11 +14,17 @@
 {% for child in children %}
     <h2 class="font-corps">Child {{ child.child_username }}</h2>
     <img src="{{ MEDIA_URL }}{{ child.image_profile_child }}" alt=""/>
-    <form class="articles_badge_winner" action="{% url 'articles_badge_winner' %}" method="post">
+<!--    <form class="articles_badge_winner" action="{% url 'articles_badge_winner' %}" method="post">-->
+<!--    {% csrf_token %}-->
+<!--        <input type="hidden" id="id_child_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">-->
+<!--        <button class="articles_badge_winner" type="submit">{{ child.child_username }}  articles_badge_winner</button>-->
+<!--    </form>-->
+    <form class="trophies_gallery" action="{% url 'trophies_gallery' id_child=child.id_child %}" method="post">
     {% csrf_token %}
-        <input type="hidden" id="id_child_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">
-        <button class="articles_badge_winner" type="submit">{{ child.child_username }}  articles_badge_winner</button>
+        <input type="hidden" id="id_child2_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">
+        <button class="trophies_gallery" type="submit">{{ child.child_username }}  trophies_gallery</button>
     </form>
+
 {% endfor %}
 
 {% endblock %}
