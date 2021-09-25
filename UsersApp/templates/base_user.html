@@ -9,19 +9,61 @@
 </head>
     {% tailwind_css %}
     <body class="bg-explor-white">
-
-        <div>
-
-            <h1 class="font-titre mb-1 text-l sm:text-6xl text-explor-green text-center m-4">Explorateur par nature</h1>
+        <div class="grid grid-cols-6 grid-row-1 content-center">
+            <div class="col-span-1 content-center" id="logo">
+                <img class="object-scale-down h-52 w-52 m-3" src="{{ MEDIA_URL }}/ex-par-nat_logo.png" alt="logo Explorateur par nature"/>
+            </div>
+            <div id="general title" class="col-start-2 col-end-6 col-span-4 align-middle m-6" id="Website Title">
+                <h1 class="align-middle text-center font-titre mb-1 text-l sm:text-6xl text-explor-green m-3">Explorateur par nature</h1>
+            </div>
+            <div id="connect" class="col-span-1 content-center text-center">
+                {% block connect %}
+                    {% if user.username %}
+                        <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-red"><strong>Nom de la tribut :</strong> {{ user.username }}</h2>
+                    {% else %}
+                        <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-red"><strong>La tribut n'est pas connectée.</strong></h2>
+                    {% endif %}
+                    <a class="font-corps" href="{% url 'wheel' %}">
+                        <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit0">Centre des opérations</button>
+                    </a>
+                    {% if user.username %}
+                        <a class="font-corps" href="{% url 'tribut_profile' %}">
+                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit1">Profil de la Tribut</button>
+                        </a>
+                        <a class="font-corps" href="{% url 'child_form' %}">
+                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit3">Ajouter un enfants à la tribut</button>
+                        </a>
+                        <a class="font-corps" href="{% url 'tutor_form' %}">
+                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit4">Ajouter un tuteur à la tribut</button>
+                        </a>
+                    {% else %}
+                        <a class="font-corps" href="{% url 'signup' %}">
+                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit5">Créer un profile</button>
+                        </a>
+                    {% endif %}
+                    {% if user.username %}
+                    <a class="font-corps" href="{% url 'account_logout' %}">
+                        <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit2">Se deconnecter</button>
+                    </a>
+                    {% else %}
+                    <a class="font-corps" href="{% url 'login' %}">
+                        <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit6">Se Connecter</button>
+                    </a>
+                    {% endif %}
+                {% endblock %}
+            </div>
         </div>
-
-        {% block content %}
-        {% endblock %}
-
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
         <!-- Footer-->
-        <footer class="bg-explor-red py-5 font-corps text-center">
-            <div class="container"><a class="">Mentions Légales - <a class="small text-center text-muted">Contact</a></a></a></div>
-        </footer>
-
+        {% block footer %}
+        <div id="footer">
+            <footer class="bg-explor-red py-5 font-corps text-center">
+                <div class="container"><a class="">Mentions Légales - <a class="small text-center text-muted">Contact</a></a></a></div>
+            </footer>
+        </div>
+        {% endblock %}
     </body>
 </html>

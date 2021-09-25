@@ -58,7 +58,7 @@ module.exports = {
             },
         colors: {
             'explor-sky': '#74A4BC',
-            'explor-blue': '#B6D6CC0',
+            'explor-blue': '#B6D6CC',
             'explor-casse': '#F1FEC6',
             'explor-red': '#C2705B',
             'explor-yellow': '#EAAE48',

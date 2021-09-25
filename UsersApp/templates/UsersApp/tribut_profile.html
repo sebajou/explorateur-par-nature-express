@@ -2,29 +2,51 @@
 
 {% block content %}
 
-<h1 class="font-titre">Membres de la tribut {{ user.username }} </h1>
+<h1 class="font-titre text-center text-explor-red text-l sm:text-6xl">Membres de la tribut {{ user.username }} </h1>
 
-<h1 class="font-titre">Tuteur : </h1>
-{% for tutor in tutors %}
-    <h2 class="font-corps">Tuteur {{ tutor.tutor_username }} image {{ tutor.image_profile_tutor.url }}</h2>
-    <img src="{{ MEDIA_URL }}{{ tutor.image_profile_tutor }}" alt=""/>
-{% endfor %}
+<h1 class="font-titre text-center text-explor-sky m-2 text-l sm:text-6xl">L'/Les enfant(s) de la tribut : </h1>
+<div id="childs" class="grid md:grid-flow-col gap-4">
+    {% for child in children %}
+    <div class="flex items-center justify-center h-screen" id="child-{{ forloop.counter0 }}">
+        <figure class="static  text-center content-center  max-w-xs cursor-pointer">
+        <div class="mt-6">
+            <button class="inline-block px-1 bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full">
+                <h1>Voici {{ child.child_username }} ! </h1>
+            </button>
+        </div>
+        <img class="static rounded-lg shadow-xl" src="{{ MEDIA_URL }}{{ child.image_profile_child }}">
+            <figcaption class="text-center -mt-16 static text-lg text-white px-4">
+                <div>
+                    <button class="inline-block px-1 bg-explor-red bg-opacity-70 hover:bg-explor-sky rounded-full">
+                        <form class="trophies_gallery" action="{% url 'trophies_gallery' id_child=child.id_child %}" method="post">
+                        {% csrf_token %}
+                            <input type="hidden" id="id_child2_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">
+                            <button class="px-3 bg-explor-red bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit">
+                                Ici les badges qu'a remporté {{ child.child_username }}
+                            </button>
+                        </form>
+                    </button>
+                </div>
+            </figcaption>
+        </figure>
+    </div>
+    {% endfor %}
+</div>
 
-<h1 class="font-titre">Enfants de la tribut : </h1>
-{% for child in children %}
-    <h2 class="font-corps">Child {{ child.child_username }}</h2>
-    <img src="{{ MEDIA_URL }}{{ child.image_profile_child }}" alt=""/>
-<!--    <form class="articles_badge_winner" action="{% url 'articles_badge_winner' %}" method="post">-->
-<!--    {% csrf_token %}-->
-<!--        <input type="hidden" id="id_child_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">-->
-<!--        <button class="articles_badge_winner" type="submit">{{ child.child_username }}  articles_badge_winner</button>-->
-<!--    </form>-->
-    <form class="trophies_gallery" action="{% url 'trophies_gallery' id_child=child.id_child %}" method="post">
-    {% csrf_token %}
-        <input type="hidden" id="id_child2_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">
-        <button class="trophies_gallery" type="submit">{{ child.child_username }}  trophies_gallery</button>
-    </form>
-
-{% endfor %}
+<h1 class="font-titre text-center text-explor-sky m-2 text-l sm:text-6xl">Le / Les tuteur(s) de la tribut : </h1>
+<div id="tutors" class="grid md:grid-flow-col gap-4">
+    {% for tutor in tutors %}
+    <div class="flex items-center justify-center h-screen" id="tutor-{{ forloop.counter0 }}">
+        <figure class="static  text-center content-center  max-w-xs cursor-pointer">
+            <div class="mt-6">
+                <button class="inline-block px-1 bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full">
+                    <h1>Tuteur {{ tutor.tutor_username }}</h1>
+                </button>
+            </div>
+        <img class="static rounded-lg shadow-xl" src="{{ MEDIA_URL }}{{ tutor.image_profile_tutor }}">
+        </figure>
+    </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

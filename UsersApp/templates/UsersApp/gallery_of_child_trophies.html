@@ -1,12 +1,22 @@
 {% extends "base_user.html" %}
 
 {% block content %}
-Voilà les trophées obtenue par {% for child in child  %}{{ child.first_name }}{% endfor %} :
-<ol>
-{% for trophie in child_trophies  %}
-    <li>
-        {{ trophie.title }}
-    </li>
-{% endfor %}
-</ol>
+<h1 class="font-titre text-center text-explor-red text-l sm:text-6xl">
+    Voilà les trophées obtenue par {% for child in child  %}{{ child.first_name }}{% endfor %} :
+</h1>
+
+<div id="badge" class="grid md:grid-flow-col gap-4">
+    {% for trophie in child_trophies %}
+    <div class="flex items-center justify-center h-screen" id="badge-{{ forloop.counter0 }}">
+        <figure class="static  text-center content-center  max-w-xs cursor-pointer">
+            <div class="mt-6">
+                <button class="inline-block px-1 bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full">
+                    <h1>Badge remporté : "{{ trophie.title }}"</h1>
+                </button>
+            </div>
+        <img class="static rounded-lg shadow-xl" src="{{ MEDIA_URL }}{{ trophie.image_badge }}">
+        </figure>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

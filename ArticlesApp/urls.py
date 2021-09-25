@@ -6,7 +6,6 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('author_home/', article_views.BibliographyView.as_view(), name='author_home'),
-    # path('article/add/', article_views.ArticleCreateView.as_view(), name='article_create'),
     path('article/add/', article_views.article_create_view, name='article_create'),
     path('article/delete/<int:pk>/', article_views.ArticleDeleteView.as_view(
         template_name='ArticlesApp/article_confirm_delete.html'), name='article_confirm_delete'),
