@@ -1,17 +1,24 @@
 {% extends "base_user.html" %}
 
 {% block content %}
-
-    <form class="articles_child_success" action="{% url 'articles_child_success' %}" method="post">
-        {% csrf_token %}
-            <input type="hidden" id="id_article_{{ forloop.counter0 }}" name="id_article" value="{{ id_article }}">{{ id_article }}<br>
-        {% for child in q_child %}
-
-            <input type="radio" id="id_child_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">
-            <label >
-                {{ child.child_username }}
-            </label><br>
+<div class="grid grid-cols-6 gap-4">
+    <div class="col-span-6 sm:col-start-2 sm:col-span-4">
+        <form class="articles_child_success" action="{% url 'articles_child_success' %}" method="post">
+            {% csrf_token %}
+                <input type="hidden" id="id_article_{{ forloop.counter0 }}" name="id_article" value="{{ id_article }}">
+                <button class="px-16 py-6 m-6 bg-explor-green bg-opacity-70 rounded-full w-full text-justify">
+                    Choisie à quel enfant(s) tu arttibue un succés pour l'article "{% for art in article %}{{ art.title }}{% endfor %}":
+                </button>
+            <div class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-full w-full text-justify">
+            <ol>
+            {% for child in q_child %}
+                <li><input type="checkbox" id="id_child_{{ forloop.counter0 }}" name="id_child" value="{{ child.id_child }}">
+                <label >{{ child.child_username }}</label></li>
             {% endfor %}
-        <button class="articles_child_success" type="submit"> articles_child_success</button>
-    </form>
+            </ol>
+            </div>
+            <button class="px-16 py-6 m-6 bg-explor-red bg-opacity-70 rounded-full w-full text-justify" type="submit"> Click ici pour attribuet le succés ! </button>
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -16,39 +16,69 @@
             <div id="general title" class="col-start-2 col-end-6 col-span-4 align-middle m-6" id="Website Title">
                 <h1 class="align-middle text-center font-titre mb-1 text-l sm:text-6xl text-explor-green m-3">Explorateur par nature</h1>
             </div>
-            <div id="connect" class="col-span-1 content-center text-center">
+            <div id="connect" class="static col-span-1 content-center text-center">
                 {% block connect %}
                     {% if user.username %}
-                        <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-red"><strong>Nom de la tribut :</strong> {{ user.username }}</h2>
+                        <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-red"><strong>Tribut connectée :</strong> {{ user.username }}</h2>
                     {% else %}
                         <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-red"><strong>La tribut n'est pas connectée.</strong></h2>
                     {% endif %}
-                    <a class="font-corps" href="{% url 'wheel' %}">
-                        <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit0">Centre des opérations</button>
-                    </a>
+                    <div class="static">
+                        <a class="font-corps" href="{% url 'wheel' %}">
+                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit0">Centre des opérations</button>
+                        </a>
+                        <div class="absolute right-6">
+                            <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/centre_des_operation.png">
+                        </div>
+                    </div>
                     {% if user.username %}
+                    <div class="static">
                         <a class="font-corps" href="{% url 'tribut_profile' %}">
                             <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit1">Profil de la Tribut</button>
                         </a>
-                        <a class="font-corps" href="{% url 'child_form' %}">
-                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit3">Ajouter un enfants à la tribut</button>
-                        </a>
+                        <div class="absolute right-6">
+                            <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/profil_tribu.png">
+                        </div>
+                    </div>
+                        <div class="static">
+                            <a class="font-corps" href="{% url 'child_form' %}">
+                                <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit3">Ajouter un enfants à la tribut</button>
+                            </a>
+                            <div class="absolute right-6">
+                                <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_enfant.png">
+                            </div>
+                        </div>
+                    <div class="static">
                         <a class="font-corps" href="{% url 'tutor_form' %}">
                             <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit4">Ajouter un tuteur à la tribut</button>
                         </a>
+                        <div class="absolute right-6">
+                            <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_tuteur.png">
+                        </div>
+                    </div>
                     {% else %}
                         <a class="font-corps" href="{% url 'signup' %}">
                             <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit5">Créer un profile</button>
                         </a>
                     {% endif %}
                     {% if user.username %}
-                    <a class="font-corps" href="{% url 'account_logout' %}">
-                        <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit2">Se deconnecter</button>
-                    </a>
+                    <div class="static">
+                        <a class="font-corps" href="{% url 'account_logout' %}">
+                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit2">Se deconnecter</button>
+                        </a>
+                        <div class="absolute right-6">
+                            <img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_deconnecter.png">
+                        </div>
+                    </div>
                     {% else %}
-                    <a class="font-corps" href="{% url 'login' %}">
-                        <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit6">Se Connecter</button>
-                    </a>
+                    <div class="static">
+                        <a class="font-corps" href="{% url 'login' %}">
+                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit6">Se Connecter</button>
+                        </a>
+                        <div class="absolute right-6">
+                            <img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_connecter.png">
+                        </div>
+                    </div>
                     {% endif %}
                 {% endblock %}
             </div>

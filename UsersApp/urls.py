@@ -19,7 +19,7 @@ urlpatterns = [
     path('article_child_success_choice', user_views.article_child_success_choice,
          name='article_child_success_choice'),
     path('articles_child_success/', user_views.articles_child_success, name='articles_child_success'),
-    path('test_caroussel/', TemplateView.as_view(template_name='UsersApp/test.html')),
+    path('test/', TemplateView.as_view(template_name='UsersApp/test.html')),
     path('trophies_gallery/<int:id_child>', user_views.gallery_of_child_trophies, name='trophies_gallery'),
 ]
 
