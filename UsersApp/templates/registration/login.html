@@ -3,36 +3,46 @@
 {% block content %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>Votre pseudo est mot de pass ne correspondent pas. Essayer encore. </p>
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+    <p>Votre comtpe ne vous permet pas d'acceder à cette page. Pour se faire,
+        merci de vous connecter avec un compte qui possède les droits d'accés.</p>
     {% else %}
-    <p>Please login to see this page.</p>
+    <p>Connecter vous pour voir cette page.</p>
     {% endif %}
 {% endif %}
 
+<h1 class="font-titre text-center text-explor-sky m-6 text-l sm:text-6xl">Connectez-vous</h1>
+<div id="childs" class="grid m-6 mgrid-cols-6 gap-4">
+<div class="col-start-1 col-span-6 sm:col-start-2 sm:col-span-4">
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
 
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
+<div class="w-full flex items-stretch md:w-auto m-8" id="menu">
+    <button class="flex flex-row h-16 p-3 m-3 font-titre bg-explor-green text-explor-red hover:bg-explor-sky rounded-full" type="submit" id="submit7">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+    </button>
+</div>
+<div class="w-full flex items-stretch md:w-auto m-8" id="menu">
+    <button class="flex flex-row h-16 p-3 m-3 font-titre bg-explor-green text-explor-red hover:bg-explor-sky rounded-full" type="submit" id="submit7">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+    </button>
+</div>
+<div class="w-full flex items-stretch md:w-auto m-8" id="menu">
+    <button class="flex flex-row h-16 p-3 m-3 font-titre bg-explor-green text-explor-red hover:bg-explor-sky rounded-full" type="submit" id="submit7">
+        <input type="submit" value="Connection">
+        <input type="hidden" name="next" value="{{ next }}">
+        </button>
+</div>
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
-
+</div>
+</div>
 {% endblock %}

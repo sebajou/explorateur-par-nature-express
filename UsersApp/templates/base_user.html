@@ -5,84 +5,104 @@
  <title>Explorateur par nature</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
     {% tailwind_css %}
     <body class="bg-explor-white">
-        <div class="grid grid-cols-6 grid-row-1 content-center">
-            <div class="col-span-1 content-center" id="logo">
-                <img class="object-scale-down h-52 w-52 m-3" src="{{ MEDIA_URL }}/ex-par-nat_logo.png" alt="logo Explorateur par nature"/>
+        <header>
+            <div class="relative h-64 m-8 overflow-hidden rounded-full bg-explor-green" id="title_band">
+              <div class="absolute z-30 flex w-full h-full">
+                <div class="relative z-30 w-5/6 px-6 py-8 text-white md:py-10 md:w-1/2">
+                  <a href="{% url 'wheel' %}">
+                  <h2 class="text-5xl mx-6 font-titre">Explorateur par nature</h2>
+                  <img class="object-scale-down h-42 w-42 m-6" src="{{ MEDIA_URL }}/ex-par-nat_logo_little.png" alt="logo Explorateur par nature"/><span></span>
+                  </a>
+                </div>
+                <div class="absolute top-0 right-0 flex w-full h-full">
+                  <div class="w-1/3 h-full bg-explor-green"></div>
+                  <div class="relative w-1/3"><svg fill="currentColor" viewBox="0 0 100 100" class="absolute inset-y-0 z-20 h-full text-explor-green">
+                      <polygon id="diagonal" points="0,0 100,0 50,100 0,100"></polygon>
+                    </svg><svg fill="currentColor" viewBox="0 0 100 100" class="absolute inset-y-0 z-10 h-full ml-6 text-white opacity-50">
+                      <polygon points="0,0 100,0 50,100 0,100"></polygon>
+                    </svg></div>
+                </div>
+              </div>
+              <div class="absolute top-0 right-0 block w-9/12 h-full"><img alt="Snowy mountain lake" class="object-cover min-w-full h-full" src="{{ MEDIA_URL }}/photo_titre.jpg"></div>
             </div>
-            <div id="general title" class="col-start-2 col-end-6 col-span-4 align-middle m-6" id="Website Title">
-                <h1 class="align-middle text-center font-titre mb-1 text-l sm:text-6xl text-explor-green m-3">Explorateur par nature</h1>
-            </div>
-            <div id="connect" class="static col-span-1 content-center text-center">
-                {% block connect %}
+            {% block connect %}
+            <div class="w-full md:flex md:items-center md:w-auto m-8" id="menu">
+                <ul class="pt-4 text-base text-gray-700 md:flex md:justify-between md:pt-0">
                     {% if user.username %}
-                        <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-red"><strong>Tribut connectée :</strong> {{ user.username }}</h2>
+                    <li>
+                        <button class="flex flex-row h-16 m-3 font-titre bg-explor-green hover:bg-explor-sky rounded-full" type="submit" id="submit7">
+                            <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-white"><strong>Tribut connectée :</strong> {{ user.username }}</h2>
+                        </button>
                     {% else %}
-                        <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-red"><strong>La tribut n'est pas connectée.</strong></h2>
+                    <li>
+                        <button class="flex flex-row h-16 px-6 m-3 font-titre bg-explor-green hover:bg-explor-sky rounded-full" type="submit" id="submit7">
+                            <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-white"><strong>La tribut n'est pas connectée.</strong></h2>
+                        </button>
                     {% endif %}
-                    <div class="static">
+                      <li>
                         <a class="font-corps" href="{% url 'wheel' %}">
-                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit0">Centre des opérations</button>
+                            <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit0">
+                                Centre des opérations<img class="object-scale-down h-16" src="{{ MEDIA_URL }}/centre_des_operation.png">
+                            </button>
                         </a>
-                        <div class="absolute right-6">
-                            <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/centre_des_operation.png">
-                        </div>
-                    </div>
+                    </li>
                     {% if user.username %}
-                    <div class="static">
+                    <li>
                         <a class="font-corps" href="{% url 'tribut_profile' %}">
-                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit1">Profil de la Tribut</button>
+                            <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit1">
+                                Profil de la Tribut <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/profil_tribu.png">
+                            </button>
                         </a>
-                        <div class="absolute right-6">
-                            <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/profil_tribu.png">
-                        </div>
-                    </div>
-                        <div class="static">
-                            <a class="font-corps" href="{% url 'child_form' %}">
-                                <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit3">Ajouter un enfants à la tribut</button>
-                            </a>
-                            <div class="absolute right-6">
-                                <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_enfant.png">
-                            </div>
-                        </div>
-                    <div class="static">
+                    </li>
+                    <li>
+                        <a class="font-corps" href="{% url 'child_form' %}">
+                            <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit3">
+                                Ajouter un enfants à la tribut<img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_enfant.png">
+                            </button>
+                        </a>
+                    </li>
+                    <li>
                         <a class="font-corps" href="{% url 'tutor_form' %}">
-                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit4">Ajouter un tuteur à la tribut</button>
+                            <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit4">
+                                Ajouter un tuteur à la tribu<img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_tuteur.png">
+                            </button>
                         </a>
-                        <div class="absolute right-6">
-                            <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_tuteur.png">
-                        </div>
-                    </div>
                     {% else %}
+                    </li>
+                    <li>
                         <a class="font-corps" href="{% url 'signup' %}">
-                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit5">Créer un profile</button>
+                            <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit5">
+                                Créer une tribu<img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_tribu.png">
+                            </button>
                         </a>
+                    </li>
                     {% endif %}
                     {% if user.username %}
-                    <div class="static">
+                    <li>
                         <a class="font-corps" href="{% url 'account_logout' %}">
-                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit2">Se deconnecter</button>
+                            <button class="flex flex-row h-16 px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit2">
+                                Se deconnecter<img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_deconnecter.png">
+                            </button>
                         </a>
-                        <div class="absolute right-6">
-                            <img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_deconnecter.png">
-                        </div>
-                    </div>
+                    </li>
                     {% else %}
-                    <div class="static">
+                    <li>
                         <a class="font-corps" href="{% url 'login' %}">
-                            <button class="px-6 mt-6 font-titre bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full" type="submit" id="submit6">Se Connecter</button>
+                            <button class="flex flex-row h-16 px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit6">
+                                Se Connecter<img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_connecter.png">
+                            </button>
                         </a>
-                        <div class="absolute right-6">
-                            <img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_connecter.png">
-                        </div>
-                    </div>
-                    {% endif %}
-                {% endblock %}
+                    </li>
+                </ul>
+                {% endif %}
             </div>
-        </div>
+            {% endblock %}
+        </nav>
+    </header>
         <div id="content">
             {% block content %}
             {% endblock %}
@@ -91,7 +111,8 @@
         {% block footer %}
         <div id="footer">
             <footer class="bg-explor-red py-5 font-corps text-center">
-                <div class="container"><a class="">Mentions Légales - <a class="small text-center text-muted">Contact</a></a></a></div>
+                <div class="container"><a class="font-corps" href="{% url 'mention_legal' %}">Mentions Légales </a> -
+                    <a class="font-corps" href="{% url 'contact' %}">Contact</a></a></div>
             </footer>
         </div>
         {% endblock %}
