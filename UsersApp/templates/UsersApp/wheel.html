@@ -55,7 +55,7 @@
             <div class="carousel-inner relative overflow-hidden w-full">
                 {% for article in articles.list %}
                 <!-- define each Slide -->
-                <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1 translate-y-1 rounded-full">
+                <span class="absolute invisible lg:visible object-scale-down h-48 w-48 top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1 translate-y-1 rounded-full">
                     <img src="{{ MEDIA_URL }}{{ articles.grouper.image_badge }}" alt=""/>
                 </span>
                 <input class="carousel-open" type="radio" id="carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}" name="carousel{{forloop.parentloop.counter}}" aria-hidden="true" hidden=""
