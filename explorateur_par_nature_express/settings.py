@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'Optional default value')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['206.81.28.133']
+ALLOWED_HOSTS = ['206.81.28.133', 'explorateur-par-nature.fr', 'www.explorateur-par-nature.fr']
 
 INTERNAL_IPS = [
     "127.0.0.1",
