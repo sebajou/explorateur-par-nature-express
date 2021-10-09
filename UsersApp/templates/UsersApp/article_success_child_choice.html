@@ -7,7 +7,7 @@
             {% csrf_token %}
                 <input type="hidden" id="id_article_{{ forloop.counter0 }}" name="id_article" value="{{ id_article }}">
                 <button class="px-16 py-6 m-6 bg-explor-green bg-opacity-70 rounded-full w-full text-justify">
-                    Choisie à quel enfant(s) tu arttibue un succés pour l'article "{% for art in article %}{{ art.title }}{% endfor %}":
+                    Choisis à quel(s) enfant(s) tu attribues un succès pour l'article "{% for art in article %}{{ art.title }}{% endfor %}":
                 </button>
             <div class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-full w-full text-justify">
             <ol>
@@ -17,7 +17,7 @@
             {% endfor %}
             </ol>
             </div>
-            <button class="px-16 py-6 m-6 bg-explor-red bg-opacity-70 rounded-full w-full text-justify" type="submit"> Click ici pour attribuet le succés ! </button>
+            <button class="px-16 py-6 m-6 bg-explor-red bg-opacity-70 rounded-full w-full text-justify" type="submit"> Clique ici pour attribuer le succès ! </button>
         </form>
     </div>
 </div>

@@ -35,12 +35,12 @@
                     {% if user.username %}
                     <li>
                         <button class="flex flex-row h-16 m-3 font-titre bg-explor-green hover:bg-explor-sky rounded-full" type="submit" id="submit7">
-                            <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-white"><strong>Tribut connectée :</strong> {{ user.username }}</h2>
+                            <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-white"><strong>Tribu connectée :</strong> {{ user.username }}</h2>
                         </button>
                     {% else %}
                     <li>
                         <button class="flex flex-row h-16 px-6 m-3 font-titre bg-explor-green hover:bg-explor-sky rounded-full" type="submit" id="submit7">
-                            <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-white"><strong>La tribut n'est pas connectée.</strong></h2>
+                            <h2 class="font-titre m-3 text-sm sm:text-2xl text-explor-white"><strong>La tribu n'est pas connectée.</strong></h2>
                         </button>
                     {% endif %}
                       <li>
@@ -54,14 +54,14 @@
                     <li>
                         <a class="font-corps" href="{% url 'tribut_profile' %}">
                             <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit1">
-                                Profil de la Tribut <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/profil_tribu.png">
+                                Profil de la Tribu <img class="object-scale-down h-16" src="{{ MEDIA_URL }}/profil_tribu.png">
                             </button>
                         </a>
                     </li>
                     <li>
                         <a class="font-corps" href="{% url 'child_form' %}">
                             <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit3">
-                                Ajouter un enfants à la tribut<img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_enfant.png">
+                                Ajouter un enfant à la tribu<img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ajouter_un_enfant.png">
                             </button>
                         </a>
                     </li>
@@ -85,7 +85,7 @@
                     <li>
                         <a class="font-corps" href="{% url 'account_logout' %}">
                             <button class="flex flex-row h-16 px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit2">
-                                Se deconnecter<img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_deconnecter.png">
+                                Se déconnecter<img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_deconnecter.png">
                             </button>
                         </a>
                     </li>
@@ -93,7 +93,7 @@
                     <li>
                         <a class="font-corps" href="{% url 'login' %}">
                             <button class="flex flex-row h-16 px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit6">
-                                Se Connecter<img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_connecter.png">
+                                Se connecter<img class="object-scale-down h-10" src="{{ MEDIA_URL }}/se_connecter.png">
                             </button>
                         </a>
                     </li>

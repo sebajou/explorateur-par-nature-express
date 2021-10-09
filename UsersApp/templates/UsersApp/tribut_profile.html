@@ -2,9 +2,9 @@
 
 {% block content %}
 
-<h1 class="font-titre text-center text-explor-red text-l sm:text-6xl">Membres de la tribut {{ user.username }} </h1>
+<h1 class="font-titre text-center text-explor-red text-l sm:text-6xl">Membres de la tribu {{ user.username }} </h1>
 
-<h1 class="font-titre text-center text-explor-sky m-6 text-l sm:text-6xl">L'/Les enfant(s) de la tribut : </h1>
+<h1 class="font-titre text-center text-explor-sky m-6 text-l sm:text-6xl">L'/Les enfant(s) de la tribu : </h1>
 <div id="childs" class="grid m-6 md:grid-flow-col gap-2">
     {% for child in children %}
     <div class="flex items-center justify-center" id="child-{{ forloop.counter0 }}">
@@ -33,7 +33,7 @@
     {% endfor %}
 </div>
 
-<h1 class="font-titre text-center text-explor-sky m-6 text-l sm:text-6xl">Le / Les tuteur(s) de la tribut : </h1>
+<h1 class="font-titre text-center text-explor-sky m-6 text-l sm:text-6xl">Le / Le(s) tuteur(s) de la tribu : </h1>
 <div id="tutors" class="grid m-6 md:grid-flow-col gap-4">
     {% for tutor in tutors %}
     <div class="flex items-center justify-center" id="tutor-{{ forloop.counter0 }}">

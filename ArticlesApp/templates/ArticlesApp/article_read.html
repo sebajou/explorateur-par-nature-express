@@ -35,7 +35,7 @@
     <button class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-3xl w-full text-justify">
         <p><strong>Content : </strong>{{ object.content }}</p></button>
     <button class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-3xl w-full text-justify">
-        <p><strong> But pedagogique : </strong>{{ object.pedagogic_aims }}</p>
+        <p><strong> But pédagogique : </strong>{{ object.pedagogic_aims }}</p>
     </button>
 
             <!-- define each caroussel -->
@@ -84,7 +84,7 @@
         </div>
     {% else %}
         <div class="px-6 py-6 m-6">
-            Il n'y a pas d'images pour cette article
+            Il n'y a pas d'image pour cet article
         </div>
     {% endif %}
     </div>
@@ -109,7 +109,7 @@
     <form class="article_child_success_choice" action="{% url 'article_child_success_choice' %}" method="post">
         {% csrf_token %}
         <input id="id_article_{{ forloop.counter0 }}" type="hidden" value="{{ object.id_article }}" name="id_article">
-        <button class="px-16 py-6 m-6 bg-explor-red bg-opacity-70 rounded-full w-full text-centre" type="submit">Attribut à un enfant un succées pour l'activité {{ object.title }}</button>
+        <button class="px-16 py-6 m-6 bg-explor-red bg-opacity-70 rounded-full w-full text-centre" type="submit">Attribue à un enfant un succès pour l'activité {{ object.title }}</button>
     </form>
     {% endif %}
 </p>

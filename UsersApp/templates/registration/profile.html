@@ -19,10 +19,10 @@
     {% csrf_token %}
     <div class="container">
         <br>
-        <h1>Page de profile, Vous êtes connecté en tant que  {{ user }}.</h1>
+        <h1>Page de profil, Vous êtes connecté en tant que  {{ user }}.</h1>
         <div  id="right-style">
-            <p><strong>Nom de la tribut :</strong> {{ user.username }}</p>
-            <p><strong>Courriel pour contacter la tribut (email) :</strong> {{ user.email }}</p>
+            <p><strong>Nom de la tribu :</strong> {{ user.username }}</p>
+            <p><strong>Courriel pour contacter la tribu (email) :</strong> {{ user.email }}</p>
             <p><strong>Last login:</strong> {{ user.last_login }}</p>
             <p><strong>Date joined:</strong> {{ user.date_joined }}</p>
         </div>

@@ -3,15 +3,15 @@
 {% block content %}
 
 {% if form.errors %}
-<p>Votre pseudo est mot de pass ne correspondent pas. Essayer encore. </p>
+<p>Votre pseudo et votre mot de passe ne correspondent pas. Essayez encore. </p>
 {% endif %}
 
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Votre comtpe ne vous permet pas d'acceder à cette page. Pour se faire,
-        merci de vous connecter avec un compte qui possède les droits d'accés.</p>
+    <p>Votre compte ne vous permet pas d'accéder à cette page. Pour se faire,
+        merci de vous connecter avec un compte qui possède les droits d'accès.</p>
     {% else %}
-    <p>Connecter vous pour voir cette page.</p>
+    <p>Connectez-vous pour voir cette page.</p>
     {% endif %}
 {% endif %}
 
