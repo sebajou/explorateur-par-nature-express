@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'Optional default value')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['206.81.28.133', 'explorateur-par-nature.fr', 'www.explorateur-par-nature.fr']
+ALLOWED_HOSTS = ['127.0.0.1', '206.81.28.133', 'explorateur-par-nature.fr', 'www.explorateur-par-nature.fr']
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -35,6 +35,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     # Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,6 +56,7 @@ TAILWIND_APP_NAME = 'theme'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

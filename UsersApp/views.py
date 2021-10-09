@@ -38,6 +38,7 @@ def user_form(request):
 
 
 def logout(request):
+    """Log out"""
     if request.user.is_authenticated:
         account_logout(request)
         return render(request, 'registration/logout.html')
@@ -124,8 +125,10 @@ def login_success(request):
 @login_required
 @tribut_required
 def articles_child_success(request):
+    """Attribute a success to an article for a child. """
     if request.method == 'POST':
         id_childs = request.POST.getlist('id_child')
+        print('id_chils', id_childs)
         for id_child in id_childs:
             id_article = request.POST.get('id_article')
             instance_child = Child.objects.get(id_child=id_child)
@@ -147,9 +150,11 @@ def article_child_success_choice(request):
         return render(request, 'UsersApp/article_success_child_choice.html',
                       {'q_child': q_child, 'id_article': id_article, 'article': article})
 
+
 @login_required
 @tribut_required
 def gallery_of_child_trophies(request, id_child):
+    """ Fill the trophies table (where are record the badges win for each child) et display it """
     if request.method == 'POST':
         id_child = request.POST.get('id_child')
 
