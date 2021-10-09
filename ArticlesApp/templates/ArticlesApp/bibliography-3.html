@@ -2,6 +2,11 @@
 
 {% block content %}
 
+<h1 class="font-titre text-center text-explor-red text-l sm:text-6xl"> List des articles pour l'auteur {{ user.username }}</h1><br>
+
+{% for object in object_list %}
+
+
       <style>
         .carousel-open:checked+.carousel-item {
           position: static;
@@ -65,7 +70,7 @@
                 <div class="carousel-item absolute opacity-0 bg-center bg-no-repeat" style="height:500px; background-image: url({{ MEDIA_URL }}{{ image.image_article }})">
                     <div class="col-start-2 col-span-4 font-corps text-center text-explor-white text-3xl">
                         <button class="px-6 mt-6 bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full">
-                            <a href="{% url 'article_read' pk=article.id_article slug=article.title|slugify %}">
+                            <a href="{% url 'article_read' pk=object.id_article slug=article.title|slugify %}">
                                 Image numéro {{ image.num_apparition }} : {{ image.title }}
                             </a>
                         </button>
@@ -115,4 +120,9 @@
 </p>
 </div>
 </div>
+
+{% endfor %}
+
+
+
 {% endblock %}

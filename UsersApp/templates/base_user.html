@@ -81,6 +81,15 @@
                         </a>
                     </li>
                     {% endif %}
+                    {% if user.is_author %}
+                    <li>
+                        <a class="font-corps" href="{% url 'author_home' %}">
+                            <button class="flex flex-row px-6 m-3 font-titre bg-explor-green text-explor-white hover:bg-explor-sky rounded-full" type="submit" id="submit5">
+                                Bibliography de l'auteur<img class="object-scale-down h-16" src="{{ MEDIA_URL }}/ex-par-nat_logo_rev.png">
+                            </button>
+                        </a>
+                    </li>
+                    {% endif %}
                     {% if user.username %}
                     <li>
                         <a class="font-corps" href="{% url 'account_logout' %}">
