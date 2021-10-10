@@ -1,37 +1,133 @@
 {% extends "base_user.html" %}
 
 {% block content %}
+      <style>
+        .carousel-open:checked+.carousel-item {
+          position: static;
+          opacity: 100;
+        }
 
-<h1>List des articles pour l'auteur {{ user.username }}</h1>
-<ul>
-{% for articles in object_list %}
-    <p><br>
-        <li>title : {{ articles.title }}</li><br>
-        <li>objectif : {{ articles.objectif }}</li><br>
-        <li>content : {{ articles.content }}</li><br>
-        <li>pedagogic_aims : {{ articles.pedagogic_aims }}</li>
+        .carousel-item {
+          -webkit-transition: opacity 0.6s ease-out;
+          transition: opacity 0.6s ease-out;
+        }
+
+        .carousel-indicators {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          bottom: 2%;
+          left: 0;
+          right: 0;
+          text-align: center;
+          z-index: 10;
+        }
+      </style>
+
+<h1 class="font-titre text-center text-explor-red text-l sm:text-6xl"> List des articles pour l'auteur {{ user.username }}</h1><br>
+
+{% for art in object_list %}
+
+<div class="grid grid-cols-6 gap-4">
+    <div class="col-span-6 sm:col-start-2 sm:col-span-4">
+    <h1 class="font-titre text-center text-explor-sky text-l sm:text-6xl border-t-2 border-explor-sky"> {{ art.title }}</h1>
+    <button class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-3xl w-full h-auto text-justify">
+        <p><strong> Image de couverture : {{ MEDIA_URL }}{{ art.article_cover_image }}</strong>
+            <img class="object-scale-down h-46 w-46" src="{{ MEDIA_URL }}{{ art.article_cover_image }}" alt=""/>
+        </p>
+    </button>
+    <button class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-3xl w-full text-justify">
+        <p><strong>Objectif : </strong>{{ art.objectif }}</p>
+    </button>
+    <button class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-3xl w-full text-justify">
+        <p><strong>Content : </strong>{{ art.content }}</p></button>
+    <button class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-3xl w-full text-justify">
+        <p><strong> But pédagogique : </strong>{{ art.pedagogic_aims }}</p>
+    </button>
+
+    <div class="col-span-6 sm:col-start-2 sm:col-span-4 bg-explor-yellow bg-opacity-70 rounded-3xl m-8 p-2">
+        <style>
+            {% for article in articles.list %}#carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}:checked~.control-{{forloop.counter0}} {
+            display: block;
+            }{% endfor %}
+
+            {% for article in articles.list %}
+            #carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}:checked~.control-{{forloop.counter0}}~.carousel-indicators li:nth-child({{forloop.counter0}})
+             .carousel-bullet {
+              color: #2b6cb0;
+            }{% endfor %}
+        </style>
+
+    {% if art.list_image.all %}
+        <div class="carousel relative rounded-xl relative overflow-hidden shadow-xl">
+            <div class="carousel-inner relative overflow-hidden w-full">
+                {% for image in art.list_image.all reversed %}
+                <!-- define each Slide -->
+                <span class="absolute invisible lg:visible object-scale-down h-48 w-48 top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 transform translate-x-1 translate-y-1 rounded-full">
+                    <img src="{{ MEDIA_URL }}{{ art.id_badge.image_badge }}" alt=""/>
+                </span>
+                <input class="carousel-open" type="radio" id="carousel{{forloop.parentloop.counter}}-{{forloop.counter0}}" name="carousel{{forloop.parentloop.counter}}" aria-hidden="true" hidden=""
+                checked="checked" style="display:none">
+                <div class="carousel-item absolute opacity-0 bg-center bg-no-repeat" style="height:500px; background-image: url({{ MEDIA_URL }}{{ image.image_article }})">
+                    <div class="col-start-2 col-span-4 font-corps text-center text-explor-white text-3xl">
+                        <button class="px-6 mt-6 bg-explor-green bg-opacity-70 hover:bg-explor-sky rounded-full">
+                            <a href="{% url 'article_read' art.pk art.title|slugify %}">detail</a>
+                                Image numéro {{ image.num_apparition }} : {{ image.title }}
+                            </a>
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+                <ol class="carousel-indicators">
+                {% for image in art.list_image.all reversed %}
+                    <li class="inline-block mr-3">
+                        <label for="carousel{{forloop.parentloop.counter}}-{{forloop.revcounter0}}"
+                        class="carousel-bullet cursor-pointer block text-6xl text-explor-green hover:text-explor-sky">•</label>
+                    </li>
+                {% endfor %}
+                </ol>
+            </div>
+        </div>
+    {% else %}
+        <div class="px-6 py-6 m-6">
+            Il n'y a pas d'image pour cet article
+        </div>
+    {% endif %}
+    </div>
+
+    <button class="px-16 py-6 m-6 bg-explor-yellow bg-opacity-70 rounded-3xl w-full text-justify">
+
+        {% for equipement in art.list_equipement.all %}
         <li>
-        {% for image in articles.list_image.all %}
-            Titre de l'image : {{ image.title }}
-            <img src="{{ MEDIA_URL }}{{ image.image_article }}" alt=""/>
+            {{ equipement.text }} :
+            {{ equipement.quantity }}
+             {{ equipement.unity }}
+        </li>
         {% endfor %}
-        </li>
-        <li>
-        {% for equipement in articles.list_equipement.all %}
-            text de l'equipement : {{ equipement.text }}
-            quantity de l'equipement : {{ equipement.quantity }}
-            unity de l'equipement : {{ equipement.unity }}
-        {% endfor %}
-        </li>
-        <li>
-        <a href="{% url 'article_read' articles.pk articles.title|slugify %}">detail</a>
-        </li>
-        <br><br><br>
-    </p>
+
+    </button>
+    {% if user.is_author == True %}
+    <button class="px-16 py-6 m-6 bg-explor-red bg-opacity-70 rounded-full w-full text-justify">
+        <a href="{% url 'article_update' art.pk %}">Mise à jour</a>
+    </button>
+    {% endif %}
+    {% if user.is_tribut == True %}
+    <form class="article_child_success_choice" action="{% url 'article_child_success_choice' %}" method="post">
+        {% csrf_token %}
+        <input id="id_article_{{ forloop.counter0 }}" type="hidden" value="{{ art.id_article }}" name="id_article">
+        <button class="px-16 py-6 m-6 bg-explor-red bg-opacity-70 rounded-full w-full text-centre" type="submit">Attribue à un enfant un succès pour l'activité {{ art.title }}</button>
+    </form>
+    {% endif %}
+</p>
+</div>
+</div>
+
+
 {% empty %}
     <li>No articles yet.</li>
 {% endfor %}
-</ul>
+
 
 
 {% endblock %}
