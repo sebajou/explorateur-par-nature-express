@@ -15,11 +15,11 @@ After the completion of all badge, the child win a virtual trophy.
 
 ### I-2 Licence
 
-See licence file (code is xxx open source, licence, content is xxx licence). 
+See licence file (code is under MIT licence, content under copyright). 
 
 ### I-3 Requirements
 
-See requirements file. 
+See requirements.txt file. 
 
 ### I-4 - Prerequired
 
@@ -33,8 +33,8 @@ See requirements file.
 3. Source the virtual environment ```[pipenv shell]```
 4. Install the dependencies ```[pipenv install]```
 5. Create database and set this database in setting.py
-```CREATE DATABASE ex_par_nat_exp_v3_db;```
-```GRANT ALL PRIVILEGES ON DATABASE ex_par_nat_exp_v3_db to sebajou;```
+```CREATE DATABASE ex_par_nat_exp_db;```
+```GRANT ALL PRIVILEGES ON DATABASE ex_par_nat_exp_db to user;```
 
 ### I-5 - How to run
 You will need two terminals pointed to the frontend and backend directories to start the servers for this application.
@@ -63,13 +63,13 @@ dedicated for the article consultation, for the badge and trophies attribution.
 ![Database architecture](media/DPM_ex-par-nat.png)
 *Database architecture*
 
-PostgreSQL database is constituted by two group of tables:
+Two group of table constitute this PostgreSQL database:
 + Tables link with users profiles and badges management. 
 + Tables link with articles and media management. 
 
 ## III - Backend
 
-Django backend is constituted by two app: 
+Two app constitute this Django backend: 
 + UsersApp who deal with users profiles and badges managements. 
 + ArticlesApp who deal with articles consultation and editing managements. 
 
@@ -78,3 +78,4 @@ Django backend is constituted by two app:
 Front are divide in two page:
 + Users page. 
 + Authors page. 
+This project use Tailwind CSS framework.

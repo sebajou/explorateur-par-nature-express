@@ -118,12 +118,17 @@ class TestPostRoutesGeneral:
     @pytest.mark.django_db
     def test_child_one_article_success(self, client):
         response = c.login(username='Pratrib', password='1AQWXSZ2')
-        id_childs = self.childs_id
-        id_article = self.article_id
-        id_to_post = {'id_child': id_childs, 'id_article': id_article}
-        response1 = client.post('articles_child_success', id_to_post)
+        # id_childs = self.childs_id
+        id_child = self.child_id
+        id_article = 10
+        id_to_post = {'id_child': id_child, 'id_article': id_article}
+        response1 = client.get('/article/11/yoga/')
+        response2 = client.get('/article_child_success_choice', id_to_post)
+        # response3 = client.post('article_child_success', id_to_post)
         assert response
         assert response1.status_code == 302
+        assert response2.status_code == 302
+        # assert response3.status_code == 302
 
     @pytest.mark.django_db
     def test_run_gallery_of_child_trophies(self, client):

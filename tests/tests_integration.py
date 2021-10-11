@@ -139,7 +139,6 @@ class TestUserComportment:
     def test_article_create_then_delete(self, client):
         c.login(username='auteur1', password='1AQWXSZ2')
         article_create = self.article_create
-        article_create2 = self.article_create2
         article_image = self.article_image
         article_equipment = self.article_equipment
         response = client.login(username='auteur1', password='1AQWXSZ2')
