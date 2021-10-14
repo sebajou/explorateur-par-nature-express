@@ -21,7 +21,7 @@ See licence file (code is under MIT licence, content under copyright).
 
 See requirements.txt file. 
 
-### I-4 - Prerequired
+### I-4 - Prerequisite
 
 1. Python 3.8 installed
 2. PostgreSQL 12.7 installed

@@ -26,7 +26,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'Optional default value')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '206.81.28.133', 'explorateur-par-nature.fr', 'www.explorateur-par-nature.fr']
+if DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1']
+else:
+    ALLOWED_HOSTS = ['206.81.28.133', 'explorateur-par-nature.fr', 'www.explorateur-par-nature.fr']
 
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -44,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third-Party Apps
+    'cloudinary_storage',
+    'cloudinary',
     'tailwind',
     'sorl.thumbnail',
     'theme',
@@ -149,8 +154,16 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+if DEBUG:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': os.getenv('CLOUD_NAME', 'Optional default value'),
+        'API_KEY': os.getenv('API_KEY', 'Optional default value'),
+        'API_SECRET': os.getenv('API_SECRET', 'Optional default value'),
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

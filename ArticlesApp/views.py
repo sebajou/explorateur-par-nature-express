@@ -39,7 +39,7 @@ def article_create_view(request):
 
     image_form_set = modelformset_factory(Image, form=ImageUploadForm, extra=5)
     equipment_form_set = modelformset_factory(Equipment, form=EquipmentForm, extra=15)
-    # 'extra' means the number of photos that you can upload   ^
+    # 'extra' means the number of photos that you can upload
     if request.method == 'POST':
 
         post_form = ArticleCreationForm(request.POST)
